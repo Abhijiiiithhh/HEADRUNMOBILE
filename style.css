@@ -1,0 +1,1607 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #171722;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#game {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    min-height: 500px;
+    overflow: hidden;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* =========================================================
+   SKY
+========================================================= */
+
+.sky {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: transparent;
+    z-index: 1;
+}
+
+#headrunSky {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* =========================================================
+   SUN
+========================================================= */
+
+.sun {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    right: 10%;
+    top: 8%;
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.5),
+            rgba(255,255,255,.1) 60%,
+            transparent 72%
+        );
+    filter: blur(2px);
+    opacity: .8;
+}
+
+/* =========================================================
+   CLOUDS
+========================================================= */
+
+.cloud {
+    position: absolute;
+    width: 145px;
+    height: 55px;
+    opacity: .45;
+    transition: opacity .15s linear;
+}
+
+.cloud span {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    background: rgba(255,255,255,.75);
+}
+
+.cloud span:nth-child(1) {
+    width: 55px;
+    height: 42px;
+    left: 5px;
+    bottom: 0;
+}
+
+.cloud span:nth-child(2) {
+    width: 65px;
+    height: 55px;
+    left: 42px;
+    bottom: 0;
+}
+
+.cloud span:nth-child(3) {
+    width: 55px;
+    height: 42px;
+    right: 4px;
+    bottom: 0;
+}
+
+.cloud-1 {
+    top: 10%;
+    left: 7%;
+}
+
+.cloud-2 {
+    top: 6%;
+    left: 40%;
+    transform: scale(.72);
+}
+
+.cloud-3 {
+    top: 20%;
+    right: 5%;
+    transform: scale(.9);
+}
+
+/* =========================================================
+   MOUNTAINS
+========================================================= */
+
+.mountains {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 70px;
+    height: 170px;
+    opacity: .12;
+    transition: opacity .2s linear;
+}
+
+.mountain {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 180px solid transparent;
+    border-right: 180px solid transparent;
+    border-bottom: 150px solid #fff;
+}
+
+.mountain-1 {
+    left: 35%;
+}
+
+.mountain-2 {
+    left: 48%;
+    transform: scale(.8);
+}
+
+.mountain-3 {
+    right: 4%;
+    transform: scale(.65);
+}
+
+/* =========================================================
+   HUD
+========================================================= */
+
+.hud {
+    position: absolute;
+    z-index: 60;
+    top: 22px;
+    left: 25px;
+    right: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    pointer-events: none;
+}
+
+.game-title {
+    color: white;
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    text-shadow: 0 3px 12px rgba(0,0,0,.08);
+}
+
+.score-box {
+    text-align: right;
+    color: white;
+}
+
+#score {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 5px;
+    line-height: 1;
+}
+
+.meters {
+    margin-top: 6px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
+/* =========================================================
+   WORLD
+========================================================= */
+
+.game-world {
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 82px;
+    overflow: hidden;
+}
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+.player {
+    position: absolute;
+    z-index: 30;
+    left: 65px;
+    bottom: -15px;
+    width: 190px;
+    height: 230px;
+    will-change: bottom;
+    transform: translateZ(0);
+    pointer-events: none;
+}
+
+#stickman {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 190px;
+    height: 230px;
+    overflow: visible;
+}
+
+.face-image {
+    position: absolute;
+    width: 74px;
+    height: 74px;
+    left: 55px;
+    top: 25px;
+    object-fit: contain;
+    pointer-events: none;
+    transform-origin: center bottom;
+    will-change: transform;
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,.22));
+    z-index: 5;
+}
+
+/* =========================================================
+   OBSTACLES
+========================================================= */
+
+#obstacles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.obstacle {
+    position: absolute;
+    right: -110px;
+    bottom: 0;
+    width: 60px;
+    height: 85px;
+    transform-origin: center bottom;
+    will-change: right, transform;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,.18));
+}
+
+/* =========================================================
+   CACTUS
+========================================================= */
+
+.cactus {
+    width: 46px;
+    height: 86px;
+}
+
+.cactus-body {
+    position: absolute;
+    left: 11px;
+    bottom: 0;
+    width: 24px;
+    height: 74px;
+    border-radius: 12px 12px 6px 6px;
+    background: linear-gradient(
+        90deg,
+        #116b46,
+        #279b63,
+        #0e5b3b
+    );
+}
+
+.cactus-body::before,
+.cactus-body::after {
+    content: "";
+    position: absolute;
+    width: 21px;
+    height: 36px;
+    border-radius: 13px 13px 5px 13px;
+    background: #198457;
+}
+
+.cactus-body::before {
+    left: -15px;
+    top: 25px;
+}
+
+.cactus-body::after {
+    right: -15px;
+    top: 11px;
+    transform: scaleX(-1);
+}
+
+/* =========================================================
+   ROCK
+========================================================= */
+
+.rock {
+    width: 70px;
+    height: 48px;
+}
+
+.rock-shape {
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    width: 62px;
+    height: 40px;
+    border-radius: 55% 45% 20% 20%;
+    background: linear-gradient(
+        135deg,
+        #858f98,
+        #525c65
+    );
+    box-shadow:
+        inset -6px -6px 0 rgba(0,0,0,.14),
+        inset 6px 5px 0 rgba(255,255,255,.13);
+}
+
+/* =========================================================
+   BLOCK
+========================================================= */
+
+.block {
+    width: 62px;
+    height: 85px;
+}
+
+.block-shape {
+    position: absolute;
+    bottom: 0;
+    width: 62px;
+    height: 85px;
+    border-radius: 11px 11px 5px 5px;
+    background: linear-gradient(
+        135deg,
+        #fff,
+        #dfe2ea 55%,
+        #b8bfd0
+    );
+    box-shadow: inset -8px 0 0 rgba(0,0,0,.08);
+}
+
+.block-shape::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 11px;
+    border-radius: 0 0 5px 5px;
+    background: #f0a900;
+}
+
+/* =========================================================
+   CONSTRUCTION CONE
+========================================================= */
+
+.cone {
+    width: 66px;
+    height: 88px;
+}
+
+.cone-shape {
+    position: relative;
+    width: 66px;
+    height: 88px;
+}
+
+.cone-tip {
+    position: absolute;
+    top: 0;
+    left: 27px;
+    width: 12px;
+    height: 11px;
+    border-radius: 4px 4px 1px 1px;
+    background: #ed492d;
+}
+
+.cone-body {
+    position: absolute;
+    left: 11px;
+    top: 7px;
+    width: 44px;
+    height: 67px;
+    background: linear-gradient(
+        90deg,
+        #d9361c,
+        #ff5631,
+        #d9361c
+    );
+    clip-path: polygon(
+        38% 0,
+        62% 0,
+        100% 100%,
+        0 100%
+    );
+    border-radius: 4px;
+}
+
+.cone-band {
+    position: absolute;
+    left: 13px;
+    width: 40px;
+    height: 11px;
+    z-index: 3;
+    background: linear-gradient(
+        90deg,
+        #ddd,
+        #fff,
+        #ddd
+    );
+    transform: skewX(-7deg);
+}
+
+.band-1 {
+    top: 31px;
+}
+
+.band-2 {
+    top: 53px;
+}
+
+.cone-base {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 66px;
+    height: 18px;
+    border-radius: 6px;
+    background: linear-gradient(
+        #ed492d,
+        #c82d19
+    );
+    box-shadow:
+        inset 0 3px rgba(255,255,255,.15),
+        0 4px 5px rgba(0,0,0,.2);
+}
+
+/* =========================================================
+   BARRIER
+========================================================= */
+
+.barrier {
+    width: 88px;
+    height: 72px;
+}
+
+.barrier-board {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 88px;
+    height: 28px;
+    border-radius: 5px;
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            #fff 0 10px,
+            #ef5237 10px 20px
+        );
+    border: 2px solid rgba(0,0,0,.15);
+}
+
+.barrier-post {
+    position: absolute;
+    bottom: 0;
+    width: 9px;
+    height: 46px;
+    border-radius: 4px;
+    background: #464953;
+}
+
+.barrier-post.left {
+    left: 9px;
+}
+
+.barrier-post.right {
+    right: 9px;
+}
+
+/* =========================================================
+   LOG
+========================================================= */
+
+.log {
+    width: 78px;
+    height: 48px;
+}
+
+.log-body {
+    position: absolute;
+    left: 7px;
+    bottom: 5px;
+    width: 65px;
+    height: 29px;
+    border-radius: 15px;
+    background: linear-gradient(
+        90deg,
+        #654025,
+        #9c6037,
+        #654025
+    );
+    transform: rotate(-4deg);
+    box-shadow: inset 0 3px rgba(255,255,255,.12);
+}
+
+.log-end {
+    position: absolute;
+    left: 3px;
+    bottom: 6px;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    background: #c58b5c;
+    border: 2px solid #70452b;
+}
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+#particles {
+    position: absolute;
+    inset: 0;
+    z-index: 40;
+    pointer-events: none;
+}
+
+.particle {
+    position: fixed;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.75);
+    animation: particleMove .6s ease-out forwards;
+}
+
+@keyframes particleMove {
+    from {
+        transform: translate(0,0) scale(1);
+        opacity: .8;
+    }
+
+    to {
+        transform:
+            translate(var(--x),var(--y))
+            scale(.1);
+        opacity: 0;
+    }
+}
+
+/* =========================================================
+   GROUND
+========================================================= */
+
+.ground {
+    position: absolute;
+    z-index: 15;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 82px;
+    background: linear-gradient(
+        180deg,
+        #272733,
+        #171722
+    );
+    border-top: 4px solid rgba(255,255,255,.58);
+    box-shadow: 0 -3px 12px rgba(0,0,0,.1);
+}
+
+.road-lines {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 29px;
+    height: 3px;
+    display: flex;
+    gap: 70px;
+    overflow: hidden;
+    opacity: .16;
+}
+
+.road-lines span {
+    flex: 0 0 35px;
+    height: 2px;
+    background: white;
+    border-radius: 3px;
+}
+
+/* =========================================================
+   HOME
+========================================================= */
+
+.start-screen {
+    position: absolute;
+    z-index: 100;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background:
+        linear-gradient(
+            110deg,
+            rgba(113,190,123,.08),
+            rgba(85,173,188,.06)
+        );
+}
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(850px,92vw);
+    margin-top: 20px;
+}
+
+.home-logo {
+    color: white;
+    font-size: clamp(50px,8vw,82px);
+    font-weight: 900;
+    letter-spacing: 12px;
+    text-shadow: 0 6px 20px rgba(0,0,0,.08);
+}
+
+.home-subtitle {
+    margin-top: 7px;
+    color: rgba(255,255,255,.9);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 5px;
+}
+
+.start-button {
+    margin-top: 28px;
+    min-width: 210px;
+    height: 58px;
+    padding: 0 28px;
+    border: none;
+    border-radius: 32px;
+    background: white;
+    color: #171722;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    box-shadow: 0 12px 25px rgba(0,0,0,.13);
+    cursor: pointer;
+    transition: .18s ease;
+}
+
+.start-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 30px rgba(0,0,0,.18);
+}
+
+.start-button:active {
+    transform: translateY(1px);
+}
+
+.play-icon {
+    margin-right: 8px;
+    font-size: 12px;
+}
+
+.control-hint {
+    margin-top: 12px;
+    color: rgba(255,255,255,.72);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+/* =========================================================
+   CHARACTER SELECT
+========================================================= */
+
+.character-select {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 26px;
+}
+
+.choose-title {
+    color: white;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin-bottom: 13px;
+}
+
+.character-list {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.character-card {
+    position: relative;
+    width: 118px;
+    height: 135px;
+    padding: 8px;
+    border-radius: 17px;
+    background: rgba(28,35,53,.48);
+    border: 2px solid rgba(255,255,255,.16);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+    background: rgba(28,35,53,.58);
+}
+
+.character-card.active {
+    border: 2px solid rgba(255,255,255,.95);
+    background: rgba(255,255,255,.16);
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,.1),
+        0 12px 25px rgba(0,0,0,.13);
+}
+
+.character-image-wrap {
+    position: relative;
+    width: 100%;
+    height: 91px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 11px;
+    background: rgba(255,255,255,.08);
+}
+
+.character-image-wrap img {
+    width: 92px;
+    height: 92px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,.18));
+    transition: transform .2s ease;
+}
+
+.character-card:hover .character-image-wrap img {
+    transform: scale(1.05);
+}
+
+.selected-check {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 21px;
+    height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: white;
+    color: #1a8b5b;
+    font-size: 12px;
+    font-weight: 900;
+    opacity: 0;
+    transform: scale(.7);
+    transition: .2s ease;
+}
+
+.character-card.active .selected-check {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.character-name {
+    margin-top: 8px;
+    color: white;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+/* =========================================================
+   GAME OVER
+========================================================= */
+
+.game-over {
+    position: absolute;
+    z-index: 200;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(20,24,35,.28);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+}
+
+.game-over-panel {
+    width: 370px;
+    max-width: 90vw;
+    padding: 24px 25px 30px;
+    border-radius: 24px;
+    background: rgba(20,25,39,.22);
+    color: white;
+}
+
+.game-over-title {
+    font-size: clamp(44px,6vw,62px);
+    font-weight: 900;
+    letter-spacing: 5px;
+    line-height: 1;
+}
+
+.result-label {
+    margin-top: 28px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    opacity: .85;
+}
+
+.final-score {
+    margin-top: 15px;
+    font-size: 45px;
+    font-weight: 900;
+    letter-spacing: 5px;
+}
+
+.best-label {
+    margin-top: 11px;
+}
+
+.best-score {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.game-over-buttons {
+    margin-top: 27px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.restart-button,
+#backHomeBtn {
+    min-width: 175px;
+    min-height: 48px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 28px;
+    background: white;
+    color: #171722;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,.18);
+    transition: .18s ease;
+}
+
+.restart-button:hover,
+#backHomeBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(0,0,0,.23);
+}
+
+#backHomeBtn {
+    margin-top: 10px !important;
+    background: rgba(255,255,255,.82);
+    display: none;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width:700px) {
+
+    .hud {
+        top: 16px;
+        left: 18px;
+        right: 20px;
+    }
+
+    .game-title {
+        font-size: 19px;
+        letter-spacing: 4px;
+    }
+
+    #score {
+        font-size: 24px;
+        letter-spacing: 3px;
+    }
+
+    .meters {
+        font-size: 7px;
+        letter-spacing: 3px;
+    }
+
+    .player {
+        left: 30px;
+    }
+
+    .home-logo {
+        letter-spacing: 7px;
+    }
+
+    .character-list {
+        gap: 7px;
+    }
+
+    .character-card {
+        width: 100px;
+        height: 120px;
+    }
+
+    .character-image-wrap {
+        height: 78px;
+    }
+
+    .character-image-wrap img {
+        width: 78px;
+        height: 78px;
+    }
+
+    .character-name {
+        font-size: 8px;
+    }
+}
+
+button {
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+canvas,
+img {
+    image-rendering: auto;
+}
+
+html,
+body,
+#game {
+    overscroll-behavior: none;
+}
+/* =========================================================
+   HEADRUN SKY FIX
+========================================================= */
+
+#headrunSky {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+
+    z-index: 0 !important;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    transition: none;
+}
+
+.sky {
+    background: transparent !important;
+    z-index: 1 !important;
+}
+
+.hud {
+    z-index: 20 !important;
+}
+
+.game-world {
+    z-index: 10 !important;
+}
+
+.ground {
+    z-index: 15 !important;
+}
+
+#nightStars {
+    z-index: 4 !important;
+    pointer-events: none;
+}
+
+.obstacle {
+    z-index: 12 !important;
+}
+
+#player {
+    z-index: 20 !important;
+}
+
+/* =========================================================
+   HEADRUN FINAL GAMEPLAY POLISH
+========================================================= */
+
+#headrunSky {
+    transition: none !important;
+    will-change: background;
+}
+
+.sky {
+    background: transparent !important;
+}
+
+.game-world {
+    background: transparent;
+}
+
+.obstacle {
+    bottom: 0 !important;
+    transform-origin: center bottom;
+    will-change: right;
+}
+
+#obstacles {
+    overflow: visible;
+}
+
+.road-lines {
+    will-change: transform;
+}
+
+#nightStars {
+    transition: opacity .35s linear;
+    will-change: opacity;
+}
+
+.player {
+    will-change: bottom;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+#stickman,
+.face-image {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* =========================================================
+   HEADRUN — PHONE / PORTRAIT VERSION
+   Keeps desktop untouched.
+========================================================= */
+
+@media screen and (max-width: 700px) {
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        height: 100dvh;
+        min-height: 0;
+        overflow: hidden;
+        position: fixed;
+        inset: 0;
+    }
+
+    body {
+        touch-action: manipulation;
+    }
+
+    #game {
+        width: 100vw;
+        height: 100dvh;
+        min-height: 0;
+        max-height: 100dvh;
+        overflow: hidden;
+        position: fixed;
+        inset: 0;
+    }
+
+    /* -----------------------------
+       SKY
+    ----------------------------- */
+
+    .cloud {
+        width: 105px;
+        height: 42px;
+    }
+
+    .cloud span:nth-child(1) {
+        width: 42px;
+        height: 32px;
+    }
+
+    .cloud span:nth-child(2) {
+        width: 48px;
+        height: 42px;
+    }
+
+    .cloud span:nth-child(3) {
+        width: 42px;
+        height: 32px;
+    }
+
+    .cloud-1 {
+        top: 9%;
+        left: 4%;
+    }
+
+    .cloud-2 {
+        top: 5%;
+        left: 42%;
+        transform: scale(.65);
+    }
+
+    .cloud-3 {
+        top: 18%;
+        right: -4%;
+        transform: scale(.72);
+    }
+
+    .sun {
+        width: 110px;
+        height: 110px;
+        right: 3%;
+        top: 9%;
+    }
+
+    .mountains {
+        bottom: 58px;
+        height: 120px;
+    }
+
+    .mountain {
+        border-left-width: 125px;
+        border-right-width: 125px;
+        border-bottom-width: 105px;
+    }
+
+    .mountain-1 {
+        left: 15%;
+    }
+
+    .mountain-2 {
+        left: 43%;
+    }
+
+    .mountain-3 {
+        right: -5%;
+    }
+
+    /* -----------------------------
+       HUD
+    ----------------------------- */
+
+    .hud {
+        top: max(14px, env(safe-area-inset-top));
+        left: 16px;
+        right: 16px;
+    }
+
+    .game-title {
+        font-size: 18px;
+        letter-spacing: 4px;
+    }
+
+    #score {
+        font-size: 23px;
+        letter-spacing: 3px;
+    }
+
+    .meters {
+        margin-top: 5px;
+        font-size: 7px;
+        letter-spacing: 3px;
+    }
+
+    /* -----------------------------
+       PLAYABLE WORLD
+    ----------------------------- */
+
+    .game-world {
+        top: 0;
+        bottom: 68px;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+    }
+
+    /* -----------------------------
+       PLAYER
+       Smaller but still clearly visible.
+    ----------------------------- */
+
+    .player {
+        left: 18px;
+        width: 145px;
+        height: 176px;
+        margin-bottom: 10px !important;
+    }
+
+    #stickman {
+        width: 145px;
+        height: 176px;
+    }
+
+    .face-image {
+        width: 57px;
+        height: 57px;
+        left: 42px;
+        top: 19px;
+    }
+
+    /* -----------------------------
+       OBSTACLES
+    ----------------------------- */
+
+    .obstacle {
+        transform-origin: center bottom;
+        filter: drop-shadow(
+            0 4px 4px rgba(0,0,0,.20)
+        );
+    }
+
+    .cactus {
+        width: 40px;
+        height: 74px;
+    }
+
+    .rock {
+        width: 60px;
+        height: 42px;
+    }
+
+    .block {
+        width: 55px;
+        height: 76px;
+    }
+
+    .cone {
+        width: 58px;
+        height: 76px;
+    }
+
+    .barrier {
+        width: 74px;
+        height: 62px;
+    }
+
+    .log {
+        width: 66px;
+        height: 40px;
+    }
+
+    /* -----------------------------
+       GROUND
+    ----------------------------- */
+
+    .ground {
+        height: 68px;
+        border-top-width: 3px;
+    }
+
+    .road-lines {
+        top: 25px;
+        height: 3px;
+        gap: 54px;
+    }
+
+    .road-lines span {
+        flex-basis: 32px;
+        height: 2px;
+    }
+
+    /* -----------------------------
+       HOME SCREEN
+    ----------------------------- */
+
+    .start-screen {
+        align-items: flex-start;
+        padding:
+            max(12px, env(safe-area-inset-top))
+            12px
+            max(12px, env(safe-area-inset-bottom));
+        overflow: hidden;
+    }
+
+    .home-content {
+        width: 100%;
+        max-width: 390px;
+        margin-top: 3vh;
+        transform: none;
+    }
+
+    .home-logo {
+        font-size: clamp(42px, 13vw, 58px);
+        letter-spacing: 7px;
+        line-height: .95;
+    }
+
+    .home-subtitle {
+        margin-top: 7px;
+        font-size: 8px;
+        letter-spacing: 3px;
+    }
+
+    .start-button {
+        margin-top: 20px;
+        min-width: 190px;
+        width: min(190px, 70vw);
+        height: 52px;
+        padding: 0 20px;
+        border-radius: 27px;
+        font-size: 12px;
+        letter-spacing: 2.5px;
+    }
+
+    .control-hint {
+        margin-top: 9px;
+        font-size: 7px;
+        letter-spacing: 2px;
+    }
+
+    /* -----------------------------
+       CHARACTER SELECTION
+    ----------------------------- */
+
+    .character-select {
+        width: 100%;
+        margin-top: 19px;
+    }
+
+    .choose-title {
+        font-size: 9px;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+    }
+
+    .character-list {
+        width: 100%;
+        gap: 6px;
+        padding: 0 2px;
+    }
+
+    .character-card {
+        width: calc((100% - 18px) / 4);
+        max-width: 91px;
+        height: 112px;
+        padding: 6px;
+        border-radius: 14px;
+    }
+
+    .character-image-wrap {
+        height: 74px;
+        border-radius: 9px;
+    }
+
+    .character-image-wrap img {
+        width: 68px;
+        height: 68px;
+    }
+
+    .selected-check {
+        width: 18px;
+        height: 18px;
+        top: 4px;
+        right: 4px;
+        font-size: 10px;
+    }
+
+    .character-name {
+        margin-top: 7px;
+        font-size: 7px;
+        letter-spacing: 1px;
+    }
+
+    /* -----------------------------
+       GAME OVER
+    ----------------------------- */
+
+    .game-over {
+        padding: 18px;
+    }
+
+    .game-over-panel {
+        width: min(340px, 90vw);
+        padding: 24px 20px 26px;
+        border-radius: 20px;
+    }
+
+    .game-over-title {
+        font-size: 39px;
+        letter-spacing: 4px;
+    }
+
+    .result-label {
+        margin-top: 22px;
+        font-size: 8px;
+        letter-spacing: 4px;
+    }
+
+    .final-score {
+        margin-top: 12px;
+        font-size: 38px;
+        letter-spacing: 4px;
+    }
+
+    .best-label {
+        margin-top: 9px;
+    }
+
+    .best-score {
+        margin-top: 8px;
+        font-size: 16px;
+    }
+
+    .game-over-buttons {
+        margin-top: 22px;
+    }
+
+    .restart-button,
+    #backHomeBtn {
+        min-width: 180px;
+        min-height: 48px;
+        font-size: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media screen and (max-width: 380px) {
+
+    .home-content {
+        margin-top: 2vh;
+    }
+
+    .home-logo {
+        font-size: 39px;
+        letter-spacing: 6px;
+    }
+
+    .start-button {
+        margin-top: 16px;
+        height: 49px;
+    }
+
+    .character-select {
+        margin-top: 15px;
+    }
+
+    .character-card {
+        height: 104px;
+    }
+
+    .character-image-wrap {
+        height: 68px;
+    }
+
+    .character-image-wrap img {
+        width: 61px;
+        height: 61px;
+    }
+
+    .character-name {
+        font-size: 6.5px;
+    }
+
+}
+
+
+/* =========================================================
+   PHONE LANDSCAPE
+========================================================= */
+
+@media screen and (max-width: 900px)
+       and (orientation: landscape) {
+
+    #game {
+        height: 100dvh;
+    }
+
+    .game-world {
+        bottom: 58px;
+    }
+
+    .ground {
+        height: 58px;
+    }
+
+    .player {
+        left: 24px;
+        width: 160px;
+        height: 194px;
+        margin-bottom: 7px !important;
+    }
+
+    #stickman {
+        width: 160px;
+        height: 194px;
+    }
+
+    .face-image {
+        width: 63px;
+        height: 63px;
+        left: 46px;
+        top: 21px;
+    }
+
+    .hud {
+        top: 10px;
+        left: 15px;
+        right: 15px;
+    }
+
+    .game-title {
+        font-size: 17px;
+    }
+
+    #score {
+        font-size: 22px;
+    }
+
+    .start-screen {
+        align-items: center;
+    }
+
+    .home-content {
+        margin-top: 0;
+        transform: scale(.82);
+    }
+
+    .character-select {
+        margin-top: 14px;
+    }
+
+    .character-card {
+        height: 100px;
+    }
+
+    .character-image-wrap {
+        height: 65px;
+    }
+
+}
+
+
+/* =========================================================
+   TOUCH POLISH
+========================================================= */
+
+button,
+.character-card,
+#game {
+    -webkit-tap-highlight-color: transparent;
+}
+
+#game {
+    touch-action: manipulation;
+}
+
+@supports (-webkit-touch-callout: none) {
+
+    #game {
+        min-height: -webkit-fill-available;
+    }
+
+}

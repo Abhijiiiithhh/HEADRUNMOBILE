@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>HEADRUN</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+<div id="game">
+
+
+    <!-- =====================================================
+         GAME BACKGROUND
+    ====================================================== -->
+
+    <div class="sky">
+
+        <div class="sun"></div>
+
+        <div class="cloud cloud-1">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="cloud cloud-2">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="cloud cloud-3">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="mountains">
+
+            <div class="mountain mountain-1"></div>
+            <div class="mountain mountain-2"></div>
+            <div class="mountain mountain-3"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         HUD
+    ====================================================== -->
+
+    <div class="hud">
+
+        <div class="game-title">
+            HEADRUN
+        </div>
+
+        <div class="score-box">
+
+            <div id="score">
+                00000
+            </div>
+
+            <div class="meters">
+                METERS
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         GAME WORLD
+    ====================================================== -->
+
+    <div class="game-world">
+
+        <div id="obstacles"></div>
+
+        <div id="particles"></div>
+
+
+        <div
+            id="player"
+            class="player"
+        >
+
+            <canvas
+                id="stickman"
+                width="190"
+                height="230"
+            ></canvas>
+
+
+            <img
+                id="faceImage"
+                class="face-image"
+                src="Chunnilal.png.jpeg"
+                alt="Character"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         GROUND
+    ====================================================== -->
+
+    <div class="ground">
+
+        <div class="road-lines">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         HOME SCREEN
+    ====================================================== -->
+
+    <div
+        id="startScreen"
+        class="start-screen"
+    >
+
+        <div class="home-glow"></div>
+
+
+        <div class="home-content">
+
+
+            <!-- BRAND -->
+
+            <div class="brand-kicker">
+                THE ULTIMATE RUN
+            </div>
+
+
+            <div class="home-logo">
+                HEAD<span>RUN</span>
+            </div>
+
+
+            <div class="home-subtitle">
+                RUN. JUMP. SURVIVE.
+            </div>
+
+
+            <!-- START BUTTON -->
+
+            <button
+                id="startBtn"
+                class="start-button"
+            >
+
+                <span class="play-icon">
+                    ▶
+                </span>
+
+                <span>
+                    START RUN
+                </span>
+
+                <span class="button-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <!-- CONTROLS -->
+
+            <div class="control-hint">
+
+                <span class="key-hint">
+                    SPACE
+                </span>
+
+                <span>
+                    TO JUMP
+                </span>
+
+                <span class="hint-divider">
+                    •
+                </span>
+
+                <span class="key-hint">
+                    CLICK
+                </span>
+
+                <span>
+                    TO JUMP
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 BEST RUN
+            ================================================== -->
+
+            <div class="home-best">
+
+                <div class="best-icon">
+                    ★
+                </div>
+
+
+                <div class="best-info">
+
+                    <div class="best-home-label">
+                        BEST RUN
+                    </div>
+
+
+                    <div
+                        id="homeBestScore"
+                        class="best-home-score"
+                    >
+                        00000
+                    </div>
+
+
+                    <div class="best-home-unit">
+                        METERS
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CHARACTER SELECT
+            ================================================== -->
+
+            <div
+                id="characterSelect"
+                class="character-select"
+            >
+
+                <div class="choose-heading">
+
+                    <div class="choose-line"></div>
+
+                    <div class="choose-title">
+                        CHOOSE YOUR RUNNER
+                    </div>
+
+                    <div class="choose-line"></div>
+
+                </div>
+
+
+                <div class="character-list">
+
+
+                    <!-- CHUNNILAL -->
+
+                    <div
+                        class="character-card active"
+                        data-character="chunnilal"
+                    >
+
+                        <div class="character-number">
+                            01
+                        </div>
+
+
+                        <div class="character-image-wrap">
+
+                            <img
+                                src="Chunnilal.png.jpeg"
+                                alt="Chunnilal"
+                            >
+
+
+                            <div class="selected-check">
+                                ✓
+                            </div>
+
+                        </div>
+
+
+                        <div class="character-name">
+                            CHUNNILAL
+                        </div>
+
+
+                        <div class="character-status">
+                            READY
+                        </div>
+
+                    </div>
+
+
+                    <!-- ALVIN -->
+
+                    <div
+                        class="character-card"
+                        data-character="alvin"
+                    >
+
+                        <div class="character-number">
+                            02
+                        </div>
+
+
+                        <div class="character-image-wrap">
+
+                            <img
+                                src="Alvin.png.jpeg"
+                                alt="Alvin"
+                            >
+
+                        </div>
+
+
+                        <div class="character-name">
+                            ALVIN
+                        </div>
+
+
+                        <div class="character-status">
+                            RUNNER
+                        </div>
+
+                    </div>
+
+
+                    <!-- RISHAB -->
+
+                    <div
+                        class="character-card"
+                        data-character="rishab"
+                    >
+
+                        <div class="character-number">
+                            03
+                        </div>
+
+
+                        <div class="character-image-wrap">
+
+                            <img
+                                src="Rishab.png.jpeg"
+                                alt="Rishab"
+                            >
+
+                        </div>
+
+
+                        <div class="character-name">
+                            RISHAB
+                        </div>
+
+
+                        <div class="character-status">
+                            RUNNER
+                        </div>
+
+                    </div>
+
+
+                    <!-- ANGATH -->
+
+                    <div
+                        class="character-card"
+                        data-character="angath"
+                    >
+
+                        <div class="character-number">
+                            04
+                        </div>
+
+
+                        <div class="character-image-wrap">
+
+                            <img
+                                src="Angath.png.jpeg"
+                                alt="Angath"
+                            >
+
+                        </div>
+
+
+                        <div class="character-name">
+                            ANGATH
+                        </div>
+
+
+                        <div class="character-status">
+                            RUNNER
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div class="home-footer">
+
+                <span>
+                    HEADRUN
+                </span>
+
+                <div class="footer-dot"></div>
+
+                <span>
+                    RUN WITHOUT LIMITS
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         GAME OVER
+    ====================================================== -->
+
+    <div
+        id="gameOver"
+        class="game-over"
+    >
+
+        <div class="game-over-panel">
+
+
+            <div class="game-over-title">
+                RUN OVER
+            </div>
+
+
+            <div class="result-label">
+                DISTANCE
+            </div>
+
+
+            <div
+                id="finalScore"
+                class="final-score"
+            >
+                00000
+            </div>
+
+
+            <div class="result-label best-label">
+                BEST
+            </div>
+
+
+            <div
+                id="bestScore"
+                class="best-score"
+            >
+                00000
+            </div>
+
+
+            <div class="game-over-buttons">
+
+                <button
+                    id="restartBtn"
+                    class="restart-button"
+                >
+                    RUN AGAIN
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script src="game.js"></script>
+
+</body>
+
+</html>
