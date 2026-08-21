@@ -1083,405 +1083,497 @@ body,
 }
 
 /* =========================================================
-   HEADRUN — MOBILE PORTRAIT V2
-   Zoomed-out gameplay + redesigned first screen
-   ========================================================= */
+   HEADRUN MOBILE HOME — PREMIUM PORTRAIT LAYOUT
+   Final mobile override
+========================================================= */
 
-@media (max-width: 700px) and (orientation: portrait) {
+@media (max-width: 600px) and (orientation: portrait) {
 
-    html, body {
+    html,
+    body {
         width: 100%;
         height: 100%;
-        height: 100dvh;
-        overflow: hidden;
         margin: 0;
+        overflow: hidden;
+        background: #9fe88a;
     }
 
     #game {
-        width: 100%;
-        height: 100dvh;
-        min-height: 0;
-        overflow: hidden;
-        position: relative;
-        touch-action: manipulation;
+        width: 100vw !important;
+        height: 100dvh !important;
+        min-height: 100dvh !important;
+        max-height: 100dvh !important;
+        overflow: hidden !important;
     }
 
-    /* -------------------------
-       GAMEPLAY VIEWPORT
-       ------------------------- */
-
-    .game-world {
-        top: 0;
-        bottom: 64px;
-        overflow: hidden;
-    }
-
-    .ground {
-        height: 64px;
-        border-top-width: 3px;
-    }
-
-    .road-lines {
-        top: 24px;
-        gap: 58px;
-    }
-
-    .road-lines span {
-        flex-basis: 30px;
-        height: 2px;
-    }
-
-    /* Zoom the runner out so there is much more room to react. */
-    .player {
-        left: 18px;
-        width: 190px;
-        height: 230px;
-        transform: scale(.68);
-        transform-origin: left bottom;
-    }
-
-    .face-image {
-        width: 74px;
-        height: 74px;
-    }
-
-    /* Obstacles become smaller on phones. */
-    .obstacle {
-        transform: scale(.82) !important;
-        transform-origin: center bottom;
-    }
-
-    /* Keep the world visually lower and less crowded. */
-    .mountains {
-        bottom: 54px;
-        height: 125px;
-        transform: scale(.82);
-        transform-origin: center bottom;
-    }
-
-    .sun {
-        width: 115px;
-        height: 115px;
-        right: 7%;
-        top: 8%;
-    }
-
-    .cloud {
-        transform: scale(.78);
-    }
-
-    .cloud-1 {
-        left: 3%;
-        top: 12%;
-    }
-
-    .cloud-2 {
-        left: 40%;
-        top: 7%;
-    }
-
-    .cloud-3 {
-        right: 1%;
-        top: 21%;
-    }
-
-    /* -------------------------
-       MOBILE HUD
-       ------------------------- */
+    /* ---------------- HUD ---------------- */
 
     .hud {
-        top: 14px;
-        left: 16px;
-        right: 16px;
-        align-items: flex-start;
+        top: max(18px, env(safe-area-inset-top)) !important;
+        left: 22px !important;
+        right: 22px !important;
+        z-index: 300 !important;
     }
 
     .game-title {
-        font-size: 16px;
-        letter-spacing: 3px;
+        font-size: 20px !important;
+        letter-spacing: 4px !important;
     }
 
     #score {
-        font-size: 25px;
-        letter-spacing: 3px;
+        font-size: 26px !important;
+        letter-spacing: 3px !important;
     }
 
     .meters {
-        margin-top: 5px;
-        font-size: 7px;
-        letter-spacing: 3px;
+        font-size: 7px !important;
+        letter-spacing: 3px !important;
     }
 
-    /* -------------------------
-       FIRST PAGE / HOME
-       Completely redesigned for
-       portrait phones.
-       ------------------------- */
+    /* ---------------- HOME OVERLAY ---------------- */
 
     .start-screen {
-        inset: 0;
-        min-height: 0;
-        padding:
-            env(safe-area-inset-top, 0px)
-            18px
-            env(safe-area-inset-bottom, 0px);
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 500 !important;
+
+        display: flex !important;
+        align-items: stretch !important;
+        justify-content: center !important;
+
+        overflow: hidden !important;
+
+        /*
+          The old transparent overlay allowed the giant
+          gameplay character to show through the home page.
+        */
         background:
             linear-gradient(
                 180deg,
-                rgba(30, 45, 60, .03),
-                rgba(20, 30, 45, .10)
-            );
+                rgba(181, 235, 135, .88) 0%,
+                rgba(184, 235, 139, .92) 48%,
+                rgba(151, 213, 144, .96) 100%
+            ) !important;
+
+        isolation: isolate;
     }
 
     .home-content {
-        width: 100%;
-        max-width: 390px;
-        height: 100%;
-        margin: 0;
-        padding: 12vh 0 5vh;
-        justify-content: center;
+        position: relative !important;
+        z-index: 10 !important;
+
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 0 !important;
+
+        margin: 0 !important;
+        padding:
+            calc(env(safe-area-inset-top) + 72px)
+            18px
+            calc(env(safe-area-inset-bottom) + 12px) !important;
+
+        box-sizing: border-box !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+
+        overflow: hidden !important;
     }
 
+    /* ---------------- HOME BRAND ---------------- */
+
     .home-logo {
-        font-size: clamp(42px, 14vw, 62px);
-        letter-spacing: 7px;
-        line-height: .95;
+        margin: 0 !important;
+
+        font-size: clamp(43px, 13vw, 62px) !important;
+        line-height: .9 !important;
+
+        letter-spacing: 7px !important;
+        font-weight: 950 !important;
+
+        color: #fff !important;
+
+        text-shadow:
+            0 5px 18px rgba(55, 104, 58, .16) !important;
     }
 
     .home-subtitle {
-        margin-top: 9px;
-        font-size: 8px;
-        letter-spacing: 3px;
+        margin-top: 10px !important;
+
+        font-size: 9px !important;
+        line-height: 1 !important;
+
+        letter-spacing: 4px !important;
+        color: rgba(255,255,255,.92) !important;
     }
 
+    /* ---------------- START BUTTON ---------------- */
+
     .start-button {
-        margin-top: 24px;
-        width: min(230px, 72vw);
-        min-width: 0;
-        height: 54px;
-        border-radius: 28px;
-        font-size: 12px;
-        letter-spacing: 2.5px;
+        width: min(285px, 78vw) !important;
+        min-width: 0 !important;
+        height: 56px !important;
+
+        margin-top: 23px !important;
+
+        padding: 0 22px !important;
+
+        border-radius: 30px !important;
+
+        font-size: 13px !important;
+        letter-spacing: 3px !important;
+
+        box-shadow:
+            0 12px 30px rgba(48,83,48,.18) !important;
+    }
+
+    .play-icon {
+        font-size: 11px !important;
+        margin-right: 7px !important;
     }
 
     .control-hint {
-        margin-top: 10px;
-        font-size: 7px;
-        letter-spacing: 2px;
+        margin-top: 10px !important;
+
+        font-size: 7px !important;
+        letter-spacing: 2.5px !important;
+
+        white-space: nowrap;
     }
 
+    /* ---------------- BEST RUN ---------------- */
+
+    .home-content .best-run,
+    .best-run {
+        margin-top: 17px !important;
+        min-height: 48px !important;
+
+        padding: 7px 18px !important;
+
+        border-radius: 14px !important;
+
+        font-size: 8px !important;
+        letter-spacing: 1.5px !important;
+    }
+
+    /* If the current version uses separate result elements,
+       keep their text compact instead of letting them grow. */
+
+    #homeBestScore,
+    #homeBestScore * {
+        font-size: inherit !important;
+    }
+
+    /* ---------------- CHARACTER AREA ---------------- */
+
     .character-select {
-        width: 100%;
-        margin-top: 23px;
+        width: 100% !important;
+
+        margin-top: 20px !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+
+        overflow: visible !important;
     }
 
     .choose-title {
-        font-size: 9px;
-        letter-spacing: 3px;
-        margin-bottom: 10px;
+        margin-bottom: 10px !important;
+
+        font-size: 9px !important;
+        letter-spacing: 3px !important;
+
+        white-space: nowrap;
     }
 
     .character-list {
-        width: 100%;
-        gap: 7px;
-        justify-content: center;
+        width: 100% !important;
+
+        display: grid !important;
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr)) !important;
+
+        gap: 7px !important;
+
+        justify-content: stretch !important;
+        align-items: stretch !important;
     }
 
     .character-card {
-        width: calc((100% - 14px) / 3);
-        max-width: 108px;
-        height: 118px;
-        padding: 6px;
-        border-radius: 15px;
+        width: auto !important;
+        height: 119px !important;
+
+        min-width: 0 !important;
+
+        padding: 6px !important;
+
+        border-radius: 15px !important;
+
+        box-sizing: border-box !important;
     }
 
     .character-image-wrap {
-        height: 75px;
-        border-radius: 10px;
+        width: 100% !important;
+        height: 76px !important;
+
+        border-radius: 10px !important;
     }
 
     .character-image-wrap img {
-        width: 73px;
-        height: 73px;
-    }
-
-    .character-name {
-        margin-top: 7px;
-        font-size: 7px;
-        letter-spacing: 1px;
+        width: 70px !important;
+        height: 70px !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
     }
 
     .selected-check {
-        width: 19px;
-        height: 19px;
-        font-size: 10px;
-        top: 4px;
-        right: 4px;
-    }
+        width: 19px !important;
+        height: 19px !important;
 
-    /* -------------------------
-       GAME OVER
-       ------------------------- */
+        top: 4px !important;
+        right: 4px !important;
 
-    .game-over {
-        padding: 18px;
-    }
-
-    .game-over-panel {
-        width: min(330px, 88vw);
-        padding: 23px 20px 27px;
-        border-radius: 22px;
-    }
-
-    .game-over-title {
-        font-size: 43px;
-        letter-spacing: 4px;
-    }
-
-    .result-label {
-        margin-top: 22px;
-        font-size: 8px;
-        letter-spacing: 4px;
-    }
-
-    .final-score {
-        margin-top: 11px;
-        font-size: 39px;
-        letter-spacing: 4px;
-    }
-
-    .best-score {
-        font-size: 16px;
-        letter-spacing: 3px;
-    }
-
-    .game-over-buttons {
-        margin-top: 22px;
-    }
-
-    .restart-button,
-    #backHomeBtn {
-        width: min(190px, 70vw);
-        min-width: 0;
-        min-height: 46px;
-        font-size: 10px;
-    }
-}
-
-/* Small phones */
-@media (max-width: 390px) and (orientation: portrait) {
-
-    .home-content {
-        padding-top: 9vh;
-        padding-bottom: 3vh;
-    }
-
-    .home-logo {
-        font-size: 43px;
-        letter-spacing: 6px;
-    }
-
-    .character-card {
-        height: 110px;
-    }
-
-    .character-image-wrap {
-        height: 69px;
-    }
-
-    .character-image-wrap img {
-        width: 67px;
-        height: 67px;
-    }
-
-    .start-button {
-        margin-top: 20px;
-        height: 50px;
-    }
-
-    .character-select {
-        margin-top: 18px;
-    }
-
-    .player {
-        left: 12px;
-        transform: scale(.62);
-    }
-
-    .obstacle {
-        transform: scale(.75) !important;
-    }
-}
-
-/* Landscape phones */
-@media (max-width: 900px) and (orientation: landscape) {
-
-    #game {
-        height: 100dvh;
-        min-height: 0;
-    }
-
-    .game-world {
-        bottom: 55px;
-    }
-
-    .ground {
-        height: 55px;
-    }
-
-    .player {
-        left: 28px;
-        transform: scale(.62);
-        transform-origin: left bottom;
-    }
-
-    .obstacle {
-        transform: scale(.78) !important;
-    }
-
-    .start-screen {
-        padding: 10px;
-    }
-
-    .home-content {
-        padding: 5px 0;
-        justify-content: center;
-    }
-
-    .home-logo {
-        font-size: 42px;
-        letter-spacing: 7px;
-    }
-
-    .home-subtitle {
-        margin-top: 4px;
-    }
-
-    .start-button {
-        margin-top: 12px;
-        height: 44px;
-    }
-
-    .character-select {
-        margin-top: 12px;
-    }
-
-    .character-card {
-        width: 88px;
-        height: 92px;
-    }
-
-    .character-image-wrap {
-        height: 53px;
-    }
-
-    .character-image-wrap img {
-        width: 54px;
-        height: 54px;
+        font-size: 10px !important;
     }
 
     .character-name {
-        margin-top: 4px;
-        font-size: 7px;
+        margin-top: 7px !important;
+
+        font-size: 7px !important;
+        letter-spacing: 1px !important;
+
+        white-space: nowrap;
     }
+
+    /* ---------------- HOME FOOTER ---------------- */
+
+    .home-content::after {
+        content: "HEADRUN • RUN WITHOUT LIMITS";
+
+        display: block;
+
+        margin-top: 13px;
+
+        color: rgba(255,255,255,.55);
+
+        font-size: 6px;
+        font-weight: 900;
+        letter-spacing: 2.5px;
+
+        white-space: nowrap;
+    }
+
+    /* Hide gameplay player behind home screen.
+       It becomes visible again automatically when the
+       start screen is hidden by JavaScript. */
+    .start-screen ~ * {
+        pointer-events: none;
+    }
+
+    /* ---------------- GAMEPLAY VIEW ---------------- */
+
+    .game-world {
+        height: calc(100dvh - 94px) !important;
+        bottom: 62px !important;
+    }
+
+    .ground {
+        height: 64px !important;
+    }
+
+    .road-lines {
+        bottom: 28px !important;
+    }
+
+    .road-lines span {
+        width: 58px !important;
+        height: 3px !important;
+    }
+
+    .player {
+        left: 34px !important;
+
+        /*
+          Keep the whole runner visible and give the player
+          a useful amount of forward reaction space.
+        */
+        transform-origin: center bottom !important;
+        scale: .72 !important;
+    }
+
+    #stickman {
+        width: 137px !important;
+        height: 166px !important;
+    }
+
+    .face-image {
+        width: 57px !important;
+        height: 57px !important;
+
+        top: 12px !important;
+        left: 55px !important;
+    }
+
+    .obstacle {
+        transform-origin: center bottom !important;
+    }
+
+    /* Make obstacles readable without making them huge. */
+    .obstacle.cone {
+        transform: scale(.86) !important;
+    }
+
+    .obstacle.cactus {
+        transform: scale(.84) !important;
+    }
+
+    .obstacle.rock {
+        transform: scale(.86) !important;
+    }
+
+    .obstacle.block {
+        transform: scale(.82) !important;
+    }
+
+    .obstacle.barrier {
+        transform: scale(.78) !important;
+    }
+
+    .obstacle.log {
+        transform: scale(.82) !important;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 390px) and (orientation: portrait) {
+
+    .home-content {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+
+    .home-logo {
+        font-size: 40px !important;
+        letter-spacing: 6px !important;
+    }
+
+    .start-button {
+        width: 265px !important;
+    }
+
+    .character-list {
+        gap: 5px !important;
+    }
+
+    .character-card {
+        height: 111px !important;
+        padding: 5px !important;
+    }
+
+    .character-image-wrap {
+        height: 70px !important;
+    }
+
+    .character-image-wrap img {
+        width: 64px !important;
+        height: 64px !important;
+    }
+
+    .character-name {
+        font-size: 6.5px !important;
+    }
+
+}
+
+
+/* =========================================================
+   PHONE LANDSCAPE
+========================================================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+    .start-screen {
+        overflow: hidden !important;
+    }
+
+    .home-content {
+        width: 100% !important;
+        height: 100dvh !important;
+
+        padding:
+            18px 30px !important;
+
+        display: grid !important;
+
+        grid-template-columns:
+            1fr 1.3fr !important;
+
+        grid-template-rows:
+            auto auto auto 1fr !important;
+
+        column-gap: 30px !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .home-logo {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+
+        font-size: 50px !important;
+    }
+
+    .home-subtitle {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .start-button {
+        grid-column: 2;
+        grid-row: 1;
+
+        margin-top: 0 !important;
+    }
+
+    .control-hint {
+        grid-column: 2;
+        grid-row: 2;
+
+        margin-top: 4px !important;
+    }
+
+    .character-select {
+        grid-column: 2;
+        grid-row: 3 / span 2;
+
+        margin-top: 8px !important;
+    }
+
+    .character-list {
+        gap: 8px !important;
+    }
+
+    .character-card {
+        width: 92px !important;
+        height: 112px !important;
+    }
+
+    .character-image-wrap {
+        height: 70px !important;
+    }
+
+    .character-image-wrap img {
+        width: 65px !important;
+        height: 65px !important;
+    }
+
 }
